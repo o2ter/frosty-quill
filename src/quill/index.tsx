@@ -26,12 +26,12 @@
 import _ from 'lodash';
 import './quill.scss';
 
-import type { Range } from 'quill';
-import { Delta, Line, Quill, RichTextInputProps, Segment } from './types';
-import { ImageResize } from './modules/imageResize';
 import { ComponentRef, useCallback, useEffect, useMemo, useRef, useRefHandle, useState } from 'frosty';
+import type { Range } from 'quill';
+import { ImageResize } from './modules/imageResize';
+import { Delta, Line, Quill, RichTextInputProps, Segment } from './types';
 
-export { Quill, Delta };
+export { Quill, Delta, Line, Segment };
 
 Quill.register('modules/imageResize', ImageResize);
 

@@ -26,11 +26,14 @@
 import _ from 'lodash';
 
 import './app.scss';
+import { QuillEditor, Line } from '../../src';
+import { useState } from 'frosty';
 
 export const App = () => {
+  const [value, setValue] = useState<Line[]>([]);
   return (
-    <div>
-      
+    <div style={{ display: 'flex', flex: 1 }}>
+      <QuillEditor style={{ flex: 1 }} value={value} onChangeValue={v => setValue(v)} />
     </div>
   );
 };
