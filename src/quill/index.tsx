@@ -108,7 +108,7 @@ export const QuillEditor = ({
   value,
   options = {},
   readOnly,
-  onChangeText,
+  onChangeValue,
   onChangeSelection,
   onMouseDown,
   onMouseUp,
@@ -117,7 +117,7 @@ export const QuillEditor = ({
   const editorRef = useRef<Quill>();
   const containerRef = useRef<ComponentRef<'div'>>(null);
 
-  const _onChangeText = useCallback(onChangeText ?? (() => { }));
+  const _onChangeValue = useCallback(onChangeValue ?? (() => { }));
   const _onChangeSelection = useCallback(onChangeSelection ?? (() => { }));
 
   const [mouseDown, setMouseDown] = useState(false);
@@ -128,7 +128,7 @@ export const QuillEditor = ({
     const editor = editorRef.current;
     if (!editor || mouseDown || _.isNil(capture)) return;
     setCapture(undefined);
-    _onChangeText(_removeEmptyLines(decodeContent(capture)), editor);
+    _onChangeValue(_removeEmptyLines(decodeContent(capture)), editor);
   }, [capture, mouseDown]);
 
   useEffect(() => {
@@ -186,7 +186,7 @@ export const QuillEditor = ({
       });
       if (!isChanged) return;
       const delta = new Delta(ops);
-      _onChangeText(decodeContent(delta), editor);
+      _onChangeValue(decodeContent(delta), editor);
     },
   }), [content]);
 

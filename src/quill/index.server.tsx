@@ -31,7 +31,7 @@ export const QuillEditor = ({
   value,
   options,
   readOnly,
-  onChangeText,
+  onChangeValue,
   onChangeSelection,
   ...props
 }: RichTextInputProps) => {
