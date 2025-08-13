@@ -195,6 +195,7 @@ export const QuillEditor = ({
     if (!element) return;
     const editor = new Quill(element, {
       theme: 'bubble',
+      readOnly: !!disabled,
       ...options,
       modules: {
         imageResize: true,

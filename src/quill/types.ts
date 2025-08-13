@@ -46,7 +46,7 @@ export type Line = {
 export type RichTextInputProps = ComponentPropsWithoutRef<'div'> & {
   ref?: Ref<RichTextInputRef | null | undefined>;
   value?: Line[];
-  options?: QuillOptions;
+  options?: Omit<QuillOptions, 'readOnly'>;
   disabled?: boolean;
   onChangeValue?: (value: Line[], quill: Quill) => void;
   onChangeSelection?: (range: Range, quill: Quill) => void;
