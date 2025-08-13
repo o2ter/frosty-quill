@@ -31,19 +31,29 @@ import type _Delta from 'quill-delta';
 export { Quill };
   
 export const Delta = Quill.import('delta') as typeof _Delta;
-export type Delta = typeof Delta
+export type Delta = InstanceType<typeof Delta>;
+
+export type Segment = {
+  attributes: Record<string, any>;
+  insert: string | Record<string, unknown>;
+};
+
+export type Line = {
+  attributes: Record<string, any>;
+  segments: Segment[];
+};
 
 export type RichTextInputProps = ComponentPropsWithoutRef<'div'> & {
   ref?: Ref<RichTextInputRef | null | undefined>;
-  value?: Delta;
+  value?: Line[];
   options?: QuillOptions;
   readOnly?: boolean;
-  onChangeText?: (value: Delta, quill: Quill) => void;
+  onChangeText?: (value: Line[], quill: Quill) => void;
   onChangeSelection?: (range: Range, quill: Quill) => void;
 };
 
 export type RichTextInputRef = {
-  value?: Delta;
+  value?: Line[];
   editor?: Quill;
   container?: HTMLDivElement;
   assets: string[];
