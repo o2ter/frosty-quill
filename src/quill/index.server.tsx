@@ -1,5 +1,5 @@
 //
-//  index.ts
+//  index.server.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2025 O2ter Limited. All rights reserved.
@@ -23,4 +23,19 @@
 //  THE SOFTWARE.
 //
 
-export * from './quill';
+import _ from 'lodash';
+import { Delta, Quill, RichTextInputProps } from './types';
+
+export type { Quill, Delta };
+
+export const QuillEditor = ({
+  ref,
+  value,
+  options,
+  readOnly,
+  onChangeText,
+  onChangeSelection,
+  ...props
+}: RichTextInputProps) => {
+  return <div { ...props } />;
+};

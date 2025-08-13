@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
 import json from '@rollup/plugin-json';
 import dts from 'rollup-plugin-dts';
+import scss from 'rollup-plugin-scss';
 
 export const rollupConfig = {
   input: {
@@ -15,12 +16,6 @@ export const rollupConfig = {
   ],
   makeAbsoluteExternalsRelative: true,
 };
-
-const resolvePlugin = resolve({
-  extensions: [
-    '.tsx', '.jsx', '.ts', '.mjs', '.js',
-  ]
-});
 
 const rollupPlugins = [
   typescript({
@@ -70,7 +65,7 @@ export default [
           ...exts.flatMap(x => [`${x}.ts`, `${x}.mjs`, `${x}.js`]),
         ]
       }),
-      resolvePlugin,
+      suffix === '' && scss({ fileName: 'index.web.css' }),
       ...rollupPlugins
     ]),
   })),
@@ -92,7 +87,9 @@ export default [
       ...rollupConfig.external,
     ],
     plugins: [
-      resolvePlugin,
+      resolve({
+        extensions: ['.tsx', '.jsx', '.ts', '.mjs', '.js']
+      }),
       dts()
     ],
   },

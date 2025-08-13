@@ -1,5 +1,5 @@
 //
-//  index.ts
+//  types.ts
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2025 O2ter Limited. All rights reserved.
@@ -23,4 +23,29 @@
 //  THE SOFTWARE.
 //
 
-export * from './quill';
+import { ComponentPropsWithoutRef, Ref } from 'frosty';
+import Quill from 'quill';
+import type { QuillOptions, Range } from 'quill';
+import type _Delta from 'quill-delta';
+
+export { Quill };
+  
+export const Delta = Quill.import('delta') as typeof _Delta;
+export type Delta = typeof Delta
+
+export type RichTextInputProps = ComponentPropsWithoutRef<'div'> & {
+  ref?: Ref<RichTextInputRef | null | undefined>;
+  value?: Delta;
+  options?: QuillOptions;
+  readOnly?: boolean;
+  onChangeText?: (value: Delta, quill: Quill) => void;
+  onChangeSelection?: (range: Range, quill: Quill) => void;
+};
+
+export type RichTextInputRef = {
+  value?: Delta;
+  editor?: Quill;
+  container?: HTMLDivElement;
+  assets: string[];
+  replaceAssets(assets: Record<string, string>): void;
+};

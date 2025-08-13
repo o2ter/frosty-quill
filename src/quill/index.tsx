@@ -23,4 +23,50 @@
 //  THE SOFTWARE.
 //
 
-export * from './quill';
+import _ from 'lodash';
+import './quill.scss';
+
+import { Delta, Quill, RichTextInputProps } from './types';
+import { ImageResize } from './modules/imageResize';
+
+export { Quill, Delta };
+
+Quill.register('modules/imageResize', ImageResize);
+
+const imgAttrs = [
+  'alt',
+  'height',
+  'width',
+] as const;
+
+Quill.register(class extends (Quill.import('formats/image') as any) {
+  static formats(domNode: HTMLImageElement) {
+    const attrs = _.filter(imgAttrs, s => domNode.hasAttribute(s));
+    return {
+      ..._.fromPairs(_.map(attrs, s => [s, domNode.getAttribute(s)])),
+    };
+  }
+  format(name: string, value: any) {
+    if (_.includes(imgAttrs, name)) {
+      if (value) {
+        this.domNode.setAttribute(name, value);
+      } else {
+        this.domNode.removeAttribute(name);
+      }
+    } else {
+      super.format(name, value);
+    }
+  }
+}, true);
+
+export const QuillEditor = ({
+  ref,
+  value,
+  options,
+  readOnly,
+  onChangeText,
+  onChangeSelection,
+  ...props
+}: RichTextInputProps) => {
+  return <div {...props} />;
+};

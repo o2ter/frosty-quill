@@ -1,5 +1,5 @@
 //
-//  index.ts
+//  app.tsx
 //
 //  The MIT License
 //  Copyright (c) 2021 - 2025 O2ter Limited. All rights reserved.
@@ -23,4 +23,16 @@
 //  THE SOFTWARE.
 //
 
-export * from './quill';
+import _ from 'lodash';
+
+import './app.scss';
+
+export const App = () => {
+  return (
+    <div>
+      
+    </div>
+  );
+};
+
+export default App;
