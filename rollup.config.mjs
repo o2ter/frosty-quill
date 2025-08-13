@@ -17,10 +17,11 @@ export const rollupConfig = {
   makeAbsoluteExternalsRelative: true,
 };
 
-const rollupPlugins = [
+const rollupPlugins = (exts) => [
   typescript({
     declaration: false,
     exclude: ['tests/**/*'],
+    moduleSuffixes: exts,
   }),
   babel({
     babelrc: false,
@@ -66,7 +67,7 @@ export default [
         ]
       }),
       suffix === '' && scss({ fileName: 'index.web.css' }),
-      ...rollupPlugins
+      ...rollupPlugins(exts),
     ]),
   })),
   {
