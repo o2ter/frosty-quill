@@ -33,7 +33,28 @@ export const App = () => {
   const [value, setValue] = useState<Line[]>([]);
   return (
     <div style={{ display: 'flex', flex: 1 }}>
-      <QuillEditor style={{ flex: 1 }} value={value} onChangeValue={v => setValue(v)} />
+      <QuillEditor
+        style={{ flex: 1 }}
+        value={value}
+        onChangeValue={v => setValue(v)}
+        options={{
+          theme: 'snow',
+          modules: {
+            toolbar: [
+              [['font', []]],
+              [['size', []]],
+              [['header', [1, 2, 3, 4, 5, 6, false]]],
+              [['color', []], ['background', []]],
+              [['align', []]],
+              [['bold', true], ['italic', true], ['strike', true], ['underline', true]],
+              [['script', 'sub'], ['script', 'super']],
+              [['indent', '-1'], ['indent', '+1']],
+              [['link', true], ['blockquote', true], ['code-block', true], ['image', true]],
+              [['list', 'ordered'], ['list', 'bullet'], ['list', 'check']],
+            ]
+          },
+        }}
+      />
     </div>
   );
 };
