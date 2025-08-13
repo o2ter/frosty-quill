@@ -24,9 +24,7 @@
 //
 
 import _ from 'lodash';
-import { Delta, Quill, RichTextInputProps } from './types';
-
-export type { Quill, Delta };
+import { RichTextInputProps } from './types';
 
 export const QuillEditor = ({
   ref,
