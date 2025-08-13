@@ -30,7 +30,7 @@ export const QuillEditor = ({
   ref,
   value,
   options,
-  readOnly,
+  disabled,
   onChangeValue,
   onChangeSelection,
   ...props

@@ -107,7 +107,7 @@ export const QuillEditor = ({
   ref,
   value,
   options = {},
-  readOnly,
+  disabled,
   onChangeValue,
   onChangeSelection,
   onMouseDown,
@@ -150,8 +150,8 @@ export const QuillEditor = ({
   }, [content, mouseDown]);
 
   useEffect(() => {
-    editorRef.current?.enable(!readOnly);
-  }, [readOnly]);
+    editorRef.current?.enable(!disabled);
+  }, [disabled]);
 
   useRefHandle(ref, () => ({
     get value() {
