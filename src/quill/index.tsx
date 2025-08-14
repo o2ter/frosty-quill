@@ -299,13 +299,14 @@ export const QuillEditor = ({
 
   return (
     <div
-      ref={containerRef}
       {...props}
       {...usePressEvents({
         onPressIn: () => setMouseDown(true),
         onPressOut: () => setMouseDown(false),
         ...props,
       })}
-    />
+    >
+      <div ref={containerRef} />
+    </div>
   );
 };
