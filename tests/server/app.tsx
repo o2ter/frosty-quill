@@ -63,6 +63,11 @@ export const App = () => {
           },
         }}
       />
+      <QuillEditor
+        style={{ flex: 1 }}
+        value={value}
+        disabled
+      />
     </div>
   );
 };
