@@ -31,6 +31,7 @@ import type { Range } from 'quill';
 import { ImageResize } from './modules/imageResize';
 import { Delta, Quill, RichTextInputProps } from './types';
 import type { Line, Segment } from './types';
+import { useWindow } from 'frosty/web';
 
 export { Quill, Delta, Line, Segment };
 
@@ -104,6 +105,85 @@ const decodeContent = (content?: Delta) => {
 
 const _removeEmptyLines = (lines: Line[]) => _.dropRightWhile(lines, x => _.every(x.segments, s => _.isEmpty(s.insert)) && _.isEmpty(x.attributes));
 
+const usePressEvents = ({
+  onPressIn,
+  onPressOut,
+  onTouchStart,
+  onTouchEnd,
+  onTouchCancel,
+  onPointerDown,
+  onPointerUp,
+  onPointerCancel,
+  onMouseDown,
+  onMouseUp,
+  onDragStart,
+}: RichTextInputProps & {
+  onPressIn: (e: TouchEvent | MouseEvent) => void;
+  onPressOut: (e: TouchEvent | MouseEvent) => void;
+}): Omit<RichTextInputProps, 'ref'> => {
+
+  const window = useWindow();
+
+  useEffect(() => {
+    if (!onPressOut) return;
+    if ('TouchEvent' in window) {
+      window.addEventListener('touchend', onPressOut);
+      return () => window.removeEventListener('touchend', onPressOut);
+    };
+    if ('PointerEvent' in window) {
+      window.addEventListener('pointerup', onPressOut);
+      return () => window.removeEventListener('pointerup', onPressOut);
+    };
+    window.addEventListener('mouseup', onPressOut);
+    return () => window.removeEventListener('mouseup', onPressOut);
+  }, []);
+
+  if ('TouchEvent' in window) return {
+    onTouchStart: function (e) {
+      if (_.isFunction(onTouchStart)) onTouchStart.call(this, e);
+      onPressIn(e);
+    },
+    onTouchEnd: function (e) {
+      if (_.isFunction(onTouchEnd)) onTouchEnd.call(this, e);
+      onPressOut(e);
+    },
+    onTouchCancel: function (e) {
+      if (_.isFunction(onTouchCancel)) onTouchCancel.call(this, e);
+      onPressOut(e);
+    },
+  };
+
+  if ('PointerEvent' in window) return {
+    onPointerDown: function (e) {
+      if (_.isFunction(onPointerDown)) onPointerDown.call(this, e);
+      onPressIn(e);
+    },
+    onPointerUp: function (e) {
+      if (_.isFunction(onPointerUp)) onPointerUp.call(this, e);
+      onPressOut(e);
+    },
+    onPointerCancel: function (e) {
+      if (_.isFunction(onPointerCancel)) onPointerCancel.call(this, e);
+      onPressOut(e);
+    },
+  };
+
+  return {
+    onMouseDown: function (e) {
+      if (_.isFunction(onMouseDown)) onMouseDown.call(this, e);
+      onPressIn(e);
+    },
+    onMouseUp: function (e) {
+      if (_.isFunction(onMouseUp)) onMouseUp.call(this, e);
+      onPressOut(e);
+    },
+    onDragStart: function (e) {
+      if (_.isFunction(onDragStart)) onDragStart.call(this, e);
+      onPressOut(e);
+    },
+  };
+};
+
 export const QuillEditor = ({
   ref,
   value,
@@ -111,8 +191,6 @@ export const QuillEditor = ({
   disabled,
   onChangeValue,
   onChangeSelection,
-  onMouseDown,
-  onMouseUp,
   ...props
 }: RichTextInputProps) => {
   const editorRef = useRef<Quill>();
@@ -222,15 +300,12 @@ export const QuillEditor = ({
   return (
     <div
       ref={containerRef}
-      onMouseDown={function (e) {
-        setMouseDown(true);
-        if (onMouseDown) onMouseDown.call(this, e);
-      }}
-      onMouseUp={function (e) {
-        setMouseDown(false);
-        if (onMouseUp) onMouseUp.call(this, e);
-      }}
       {...props}
+      {...usePressEvents({
+        onPressIn: () => setMouseDown(true),
+        onPressOut: () => setMouseDown(false),
+        ...props,
+      })}
     />
   );
 };
