@@ -38,7 +38,7 @@ export const App = () => {
         value={value}
         onChangeValue={v => setValue(v)}
         options={{
-          //theme: 'snow',
+          theme: 'snow',
           modules: {
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
