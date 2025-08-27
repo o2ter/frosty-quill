@@ -1429,10 +1429,10 @@ fraction.js@^4.3.7:
   resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.3.7.tgz#06ca0085157e42fda7f9e726e79fefc4068840f7"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
-frosty@^0.0.100:
-  version "0.0.100"
-  resolved "https://registry.yarnpkg.com/frosty/-/frosty-0.0.100.tgz#e905bc2c72dbce29f4eb6c4fffc0ec33bb1e2362"
-  integrity sha512-1XwS6EnJ8kkPtLxqBsWy0/d2eW/SG0bS2lf9Mpkb7/URBfqUyl59mFnP9Gquk+vTtTP77WXilXPZvyAdZO54MA==
+frosty@^0.0.101:
+  version "0.0.101"
+  resolved "https://registry.yarnpkg.com/frosty/-/frosty-0.0.101.tgz#5ec9733b2d156b0c91f6961d6cda10667005f8e2"
+  integrity sha512-0ppgUwwBCyS5ltC66vf0pnU2qqdbygxeHYuFettc8mfi5B6XC1Bo1+nyfLmB5j4KWGqbuX+IIOZ9hla7IhDQKg==
   dependencies:
     "@o2ter/utils-js" "^0.0.19"
     "@types/jsdom" "^21.1.7"
