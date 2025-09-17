@@ -16,7 +16,7 @@
     "start": "npx frosty run -d -w -s ./src tests/server/app.tsx"
   },
   "dependencies": {
-    "frosty": "^0.0.102",
+    "frosty": "^0.0.103",
     "lodash": "^4.17.21",
     "quill": "^2.0.3",
     "quill-delta": "^5.1.0",
