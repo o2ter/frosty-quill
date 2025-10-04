@@ -55,7 +55,7 @@ export default [
         entryFileNames: `[name]${suffix}.mjs`,
         chunkFileNames: `internals/[name]-[hash]${suffix}.mjs`,
         dir: './dist',
-        format: 'esm',
+        format: 'es',
         sourcemap: true,
       },
     ],
