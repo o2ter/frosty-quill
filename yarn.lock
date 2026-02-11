@@ -1448,10 +1448,10 @@ fill-range@^7.1.1:
   dependencies:
     to-regex-range "^5.0.1"
 
-frosty@^0.0.131:
-  version "0.0.131"
-  resolved "https://registry.yarnpkg.com/frosty/-/frosty-0.0.131.tgz#9fb73876a1a9df956b07bb13740ef07b2c6ebce7"
-  integrity sha512-mygtA9cAplaiDj9fbvflq9fLMt16D/+U/4nsm7v98pLAzHbyOnfyZqvMFfKSB14d6vVs6Eso/DgtEC0uijZMXg==
+frosty@^0.0.132:
+  version "0.0.132"
+  resolved "https://registry.yarnpkg.com/frosty/-/frosty-0.0.132.tgz#1d1662531ed2e092b8b842accf1aa971b1d8216e"
+  integrity sha512-GyKmIkK/7drV5Dn++N6EAqtJBwreXrSNhR7xwCGCaSrd7vMqD46md47571DBSnpGgkdlLq9mDHftSWZghGw3cQ==
   dependencies:
     "@o2ter/utils-js" "^0.0.19"
     "@types/jsdom" "^21.1.7"
